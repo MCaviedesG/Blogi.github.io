@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué es Blockchain? - Blogi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        /* Header Encapsulado */
+        .header-wrapper {
+            background-color: #f5f5f5;
+            padding: 20px 50px;
+        }
+
+        .header-container {
+            background-color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00b8e6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: #009ec7;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 17px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #00b8e6;
+        }
+
+        nav a.active {
+            color: #00b8e6;
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #00b8e6;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn {
+            background-color: #00b8e6;
+            color: white !important;
+            padding: 12px 35px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .login-btn:hover {
+            background-color: #009ec7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 184, 230, 0.3);
+        }
+
+        .register-btn {
+            color: #333 !important;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .register-btn:hover {
+            border-color: #00b8e6;
+            color: #00b8e6 !important;
+        }
+
+        .search-icon {
+            font-size: 22px;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-icon:hover {
+            color: #00b8e6;
+        }
+
+        /* Article Container */
+        .article-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .article-header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #00b8e6;
+            padding-bottom: 20px;
+        }
+
+        .article-header h1 {
+            font-size: 42px;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            color: #666;
+            font-size: 14px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #00b8e6 0%, #0080b3 100%);
+            margin-bottom: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .article-content h2 {
+            font-size: 32px;
+            margin: 40px 0 20px;
+            color: #000;
+        }
+
+        .article-content h3 {
+            font-size: 24px;
+            margin: 30px 0 15px;
+            color: #333;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0 20px 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-left: 4px solid #00b8e6;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background-color: #00b8e6;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #009ec7;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2b2b2b;
+            color: white;
+            padding: 60px 50px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-item {
+            text-align: center;
+        }
+
+        .footer-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .footer-item h3 {
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 30px;
+                border-radius: 30px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 15px 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 15px;
+            }
+
+            .login-btn, .register-btn {
+                padding: 10px 25px;
+                font-size: 15px;
+            }
+
+            .article-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .article-header h1 {
+                font-size: 32px;
+            }
+
+            .article-content {
+                font-size: 16px;
+            }
+
+            .article-image {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-wrapper">
+        <header class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>Blogi</span>
+            </a>
+
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#blog" class="active">Artículos</a>
+                <a href="#categorias">Categorías</a>
+                <a href="index.html#contacto">Contactanos</a>
+            </nav>
+
+            <div class="nav-buttons">
+                <a href="#" class="login-btn">Login</a>
+                <a href="#" class="register-btn">Register</a>
+                <span class="search-icon">🔍</span>
+            </div>
+        </header>
+    </div>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1>¿Qué es Blockchain?</h1>
+            <div class="article-meta">
+                <span>📅 15 de Febrero, 2026</span>
+                <span>✍️ Autor:Satoshi Nakamoto</span>
+                <span>🏷️ Categoría: Tecnología</span>
+            </div>
+        </div>
+
+        <div class="article-image">
+            <img src="IMG/450_1000.jpg" alt="BlockChain" width="800" height="400" style="border-radius: 10px; object-fit: cover;">
+        </div>
+
+        <div class="article-content">
+            <p>El blockchain o cadena de bloques es una tecnología revolucionaria que está transformando la manera en que almacenamos y compartimos información en el mundo digital. Se trata de un libro de contabilidad digital compartido e inmutable que permite el registro de transacciones y el seguimiento de activos de forma descentralizada, segura y transparente.</p>
+
+            <div class="highlight-box">
+                <p><strong>Definición clave:</strong> Blockchain es una tecnología basada en una cadena de bloques de operaciones descentralizada y pública que genera una base de datos compartida a la que tienen acceso sus participantes, los cuáles pueden rastrear cada transacción que hayan realizado.</p>
+            </div>
+
+            <h2>¿Cómo Funciona Blockchain?</h2>
+            <p>La tecnología blockchain funciona de manera similar a un gran libro de contabilidad inmodificable y compartido que van escribiendo una gran cantidad de ordenadores de forma simultánea. En lugar de estar en un único servidor, los datos se distribuyen en miles de ordenadores alrededor del mundo, lo que garantiza su seguridad e integridad.</p>
+
+            <h3>Estructura de Bloques</h3>
+            <p>Cada transacción se registra como un "bloque" de datos en el blockchain. Estos bloques capturan detalles clave sobre el movimiento de activos y contienen:</p>
+
+            <ul>
+                <li><strong>Conjunto de transacciones:</strong> Información detallada sobre quién, qué, cuándo, dónde y cuánto</li>
+                <li><strong>Marca de tiempo:</strong> Registro temporal exacto de cuando ocurrió la transacción</li>
+                <li><strong>Hash único:</strong> Un código criptográfico que identifica el bloque</li>
+                <li><strong>Referencia al bloque anterior:</strong> Conexión criptográfica con el bloque previo en la cadena</li>
+            </ul>
+
+            <p>Cada bloque contiene un código único llamado 'hash' que lo vincula con el bloque anterior en la cadena. Este hash se genera basándose en la información del bloque anterior, lo que significa que cualquier cambio en un bloque alteraría su hash y, por lo tanto, invalidaría todos los bloques siguientes.</p>
+
+            <h2>Características Principales</h2>
+
+            <h3>Descentralización</h3>
+            <p>A diferencia de las bases de datos tradicionales que se almacenan en un solo lugar, blockchain funciona como una base de datos distribuida con información almacenada en múltiples computadoras. Esto la hace extremadamente resistente a la manipulación y caídas del sistema.</p>
+
+            <h3>Transparencia y Seguridad</h3>
+            <p>Todas las transacciones son validadas por los nodos participantes de la red a través de algoritmos encriptados. Una vez verificado y añadido un bloque por la red, la cadena es pública y se distribuye entre todos los usuarios, asegurando que la información sea accesible y transparente para todos los participantes.</p>
+
+            <h3>Inmutabilidad</h3>
+            <p>Una vez que los datos son registrados en la blockchain, son prácticamente imposibles de modificar. Esta característica proporciona un registro a prueba de manipulaciones, ideal para aplicaciones que requieren alta integridad de datos.</p>
+
+            <h2>Aplicaciones y Casos de Uso</h2>
+            <img src="IMG/Cómo_funciona_Blockchain_Paso_a_paso.jpg" alt="Descripción de la imagen" width="800" height="400" style="border-radius: 10px; object-fit: cover;">
+            <h3>Criptomonedas</h3>
+            <p>Es la aplicación más conocida de esta tecnología. Blockchain se usa para respaldar las monedas digitales como Bitcoin y Ethereum, permitiendo descentralizar y asegurar las transacciones financieras sin depender de entidades centralizadas como bancos.</p>
+
+            <h3>Cadena de Suministro</h3>
+            <p>Empresas como Walmart y Coca-Cola ya utilizan blockchain para rastrear productos desde su origen hasta el consumidor final. Esta aplicación mejora la trazabilidad, transparencia y eficiencia, permitiendo localizar rápidamente cualquier dato en tiempo reducido.</p>
+
+            <h3>Finanzas Descentralizadas (DeFi)</h3>
+            <p>Las aplicaciones DeFi utilizan blockchain para crear servicios financieros sin intermediarios tradicionales. Esto incluye préstamos, remesas internacionales, inversiones y muchos otros usos, eliminando la necesidad de procesos lentos y costosos.</p>
+
+            <h3>Servicios Públicos</h3>
+            <p>En la industria de servicios públicos, blockchain está siendo probado para venta entre pares de energía solar, comercio de energía entre conglomerados y facturación automatizada para estaciones de carga de vehículos eléctricos.</p>
+
+            <h3>Otros Sectores</h3>
+            <ul>
+                <li>Gestión de identidad digital</li>
+                <li>Registros médicos y de salud</li>
+                <li>Propiedad intelectual y derechos de autor</li>
+                <li>Votación electrónica segura</li>
+                <li>Contratos inteligentes automatizados</li>
+            </ul>
+
+            <h2>El Futuro de Blockchain</h2>
+            <p>Según datos de la consultora PwC, blockchain podría impulsar el PIB mundial hasta los 1,76 billones de dólares en 2030. Muchas industrias están ahora implementando soluciones blockchain para asegurar su lugar en un mundo cada vez más digital y descentralizado.</p>
+
+            <p>La tecnología blockchain representa un cambio fundamental en cómo confiamos, compartimos y verificamos información en la era digital. Su capacidad para proporcionar transparencia, seguridad y descentralización la convierte en una herramienta poderosa para transformar múltiples sectores de la economía global.</p>
+
+            <div class="highlight-box">
+                <p><strong>Conclusión:</strong> Blockchain no es solo la tecnología detrás de las criptomonedas, es un sistema revolucionario que está redefiniendo la confianza digital y tiene el potencial de transformar prácticamente cualquier industria que requiera registros seguros, transparentes e inmutables.</p>
+            </div>
+
+            <a href="index.html" class="back-btn">← Volver al Inicio</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-item">
+                <div class="footer-icon">📍</div>
+                <h3>Ubicación</h3>
+            </div>
+            <div class="footer-item">
+                <div class="footer-icon">📞</div>
+                <h3>+57 300 000 0000</h3>
+            </div>
+            <div class="footer-item">
+                <div class="footer-icon">✉️</div>
+                <h3>asistencia@Blogi.co</h3>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Todos los Derechos Reservados.
+        </div>
+    </footer>
+</body>
+</html>

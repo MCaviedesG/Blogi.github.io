@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT de Automatización Tecnológica - Blogi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; color: #333; background-color: #f5f5f5; line-height: 1.6; }
+
+        /* Header Encapsulado */
+        .header-wrapper { background-color: #f5f5f5; padding: 20px 50px; }
+        .header-container {
+            background-color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold; color: #00b8e6; text-decoration: none; transition: color 0.3s; }
+        .logo:hover { color: #009ec7; }
+        .logo-icon { font-size: 28px; }
+        nav { display: flex; align-items: center; gap: 35px; }
+        nav a { text-decoration: none; color: #333; font-size: 17px; font-weight: 500; transition: color 0.3s; position: relative; }
+        nav a:hover { color: #00b8e6; }
+        nav a.active { color: #00b8e6; }
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #00b8e6;
+        }
+        .nav-buttons { display: flex; align-items: center; gap: 15px; }
+        .login-btn {
+            background-color: #00b8e6;
+            color: white !important;
+            padding: 12px 35px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .login-btn:hover { background-color: #009ec7; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 184, 230, 0.3); }
+        .register-btn {
+            color: #333 !important;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .register-btn:hover { border-color: #00b8e6; color: #00b8e6 !important; }
+        .search-icon { font-size: 22px; color: #666; cursor: pointer; transition: color 0.3s; }
+        .search-icon:hover { color: #00b8e6; }
+
+        /* Article Container */
+        .article-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .article-header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #00b8e6;
+            padding-bottom: 20px;
+        }
+        .article-header h1 { font-size: 42px; color: #000; margin-bottom: 15px; }
+        .article-meta { color: #666; font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
+        .article-meta span { display: flex; align-items: center; gap: 5px; }
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #00b8e6 0%, #0080b3 100%);
+            margin-bottom: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+        .article-content { font-size: 18px; line-height: 1.8; color: #444; }
+        .article-content h2 { font-size: 32px; margin: 40px 0 20px; color: #000; }
+        .article-content h3 { font-size: 24px; margin: 30px 0 15px; color: #333; }
+        .article-content p { margin-bottom: 20px; }
+        .article-content ul, .article-content ol { margin: 20px 0 20px 30px; }
+        .article-content li { margin-bottom: 10px; }
+        .highlight-box {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-left: 4px solid #00b8e6;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        .highlight-box p { margin-bottom: 10px; }
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background-color: #00b8e6;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover { background-color: #009ec7; }
+
+        /* Arquitectura steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .step-card {
+            background: #f5f5f5;
+            border-top: 4px solid #00b8e6;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+        }
+        .step-card .step-num {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00b8e6;
+            margin-bottom: 8px;
+        }
+        .step-card p { font-size: 15px; color: #555; margin: 0; }
+
+        /* Benefits grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .benefit-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: transform 0.3s;
+        }
+        .benefit-card:hover { transform: translateY(-4px); }
+        .benefit-icon { font-size: 36px; margin-bottom: 10px; }
+        .benefit-card h3 { font-size: 17px; color: #00b8e6; margin-bottom: 8px; }
+        .benefit-card p { font-size: 14px; color: #666; margin: 0; }
+
+        /* Footer */
+        footer { background-color: #2b2b2b; color: white; padding: 60px 50px 20px; margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-around; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 40px; }
+        .footer-item { text-align: center; }
+        .footer-icon { font-size: 48px; margin-bottom: 15px; }
+        .footer-item h3 { font-size: 18px; font-weight: normal; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #444; color: #999; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-container { flex-direction: column; gap: 20px; padding: 20px 30px; border-radius: 30px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 20px; }
+        }
+        @media (max-width: 768px) {
+            .header-wrapper { padding: 15px 20px; }
+            nav { gap: 15px; }
+            nav a { font-size: 15px; }
+            .login-btn, .register-btn { padding: 10px 25px; font-size: 15px; }
+            .article-container { padding: 30px 20px; margin: 20px; }
+            .article-header h1 { font-size: 32px; }
+            .article-content { font-size: 16px; }
+            .article-image { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header-wrapper">
+    <header class="header-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Blogi</span>
+        </a>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#blog" class="active">Artículos</a>
+            <a href="categorias">Categorías</a>
+            <a href="index.html#contacto">Contáctanos</a>
+        </nav>
+        <div class="nav-buttons">
+            <a href="#" class="login-btn">Login</a>
+            <a href="#" class="register-btn">Registra</a>
+            <span class="search-icon">🔍</span>
+        </div>
+    </header>
+</div>
+
+<!-- Artículo -->
+<div class="article-container">
+
+    <!-- Header del artículo -->
+    <div class="article-header">
+        <h1>IoT de Automatización Tecnológica</h1>
+        <div class="article-meta">
+            <span>📅 26 de Febrero, 2026</span>
+            <span>✍️ Autor: Exposición Tecnológica</span>
+            <span>🏷️ Categoría: Tecnología · IoT · IA</span>
+        </div>
+    </div>
+
+    <!-- Imagen hero -->
+    <div class="article-image">🏠</div>
+
+    <!-- Contenido -->
+    <div class="article-content">
+
+        <p>Hoy en día hablamos de casas inteligentes, pero muchas soluciones se quedan cortas: algunas solo controlan bombillos y enchufes, otras dependen de un único asistente de voz y muchas requieren múltiples apps para tareas simples. La propuesta <strong>IoT de Automatización Tecnológica</strong> busca unificar todo en un mismo ecosistema: dispositivos conectados (IoT), control por voz (Alexa y Google Assistant) y una capa de inteligencia artificial que aprende del usuario para automatizar con más precisión.</p>
+
+        <div class="highlight-box">
+            <p><strong>Idea central:</strong> Pasar de un simple "control remoto avanzado" a una <strong>automatización real</strong>. No se trata solo de decir "enciende la luz", sino de que el sistema entienda hábitos, contexto y objetivos: ahorrar energía, mejorar seguridad, aumentar comodidad y anticiparse a necesidades sin que el usuario programe reglas complicadas.</p>
+        </div>
+
+        <!-- Sección 1 -->
+        <h2>¿Qué es y cómo se diferencia de un smart home típico?</h2>
+
+        <p>Un smart home tradicional se basa en reglas rígidas del tipo: <em>"Si son las 7 pm, enciende la sala"</em> o <em>"Si detectas movimiento, prende la luz"</em>. Esto funciona, pero no se adapta a cambios en la rutina ni al contexto real del usuario.</p>
+
+        <p>El IoT de Automatización Tecnológica agrega <strong>tres mejoras clave</strong> frente al modelo clásico:</p>
+
+        <ul>
+            <li><strong>Integración múltiple:</strong> funciona con Alexa y Google Assistant en paralelo, sin depender de una sola plataforma ni de un ecosistema cerrado.</li>
+            <li><strong>Cerebro central:</strong> una plataforma que conecta sensores, dispositivos y servicios bajo una misma lógica global y unificada.</li>
+            <li><strong>IA contextual:</strong> aprende horarios, preferencias, ocupación, clima y consumo para tomar decisiones más inteligentes y reducir rutinas inútiles o falsos encendidos.</li>
+        </ul>
+
+        <!-- Sección 2 -->
+        <h2>Componentes del sistema</h2>
+
+        <p>Para que el sistema sea completo, se apoya en estos bloques principales:</p>
+
+        <ul>
+            <li><strong>Dispositivos IoT:</strong> luces, cerraduras, cámaras, sensores de movimiento, temperatura, humo y fugas de agua, enchufes inteligentes, persianas y electrodomésticos conectados.</li>
+            <li><strong>Conectividad:</strong> redes como Wi‑Fi, Zigbee, Z‑Wave o estándares modernos como Matter/Thread que mejoran compatibilidad y estabilidad entre marcas distintas.</li>
+            <li><strong>Hubi o servidor:</strong> puede ser un hubi físico en casa o una combinación local + nube para equilibrar velocidad, privacidad y funciones avanzadas.</li>
+            <li><strong>Asistentes de voz:</strong> Alexa y Google Assistant como interfaces naturales de voz, complementadas por una app móvil para control remoto.</li>
+            <li><strong>Capa de IA:</strong> motor que analiza eventos y hábitos, propone rutinas, predice necesidades y optimiza el consumo energético sin comprometer la privacidad del usuario.</li>
+        </ul>
+
+        <!-- Sección 3: Arquitectura -->
+        <h2>¿Cómo funciona por dentro?</h2>
+
+        <p>La arquitectura sigue un flujo progresivo donde los sensores alimentan al hubi, y este alimenta a la IA para ejecutar y aprender de cada acción:</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <p>Sensores capturan datos (movimiento, temperatura, presencia, consumo)</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <p>El hubi recibe eventos y los normaliza en un mismo lenguaje</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <p>La IA evalúa contexto: quién está, qué hora es, qué suele hacerse</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <p>Se ejecuta una acción: encender, ajustar, alertar o ahorrar energía</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">5</div>
+                <p>El sistema aprende del resultado y ajusta el modelo si el usuario corrige</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Principio de diseño clave:</strong> Las acciones críticas (luces, cerraduras, alarmas) deben funcionar <strong>localmente</strong> sin necesidad de internet. La nube se reserva para tareas pesadas: analítica avanzada, copias de seguridad y modelos de IA más complejos.</p>
+        </div>
+
+        <!-- Sección 4: Ejemplo práctico -->
+        <h2>Ejemplo práctico: una rutina inteligente de verdad</h2>
+
+        <p>Imagina un día común donde el sistema toma decisiones con contexto, no solo siguiendo reglas rígidas:</p>
+
+        <ol>
+            <li>Llegas a casa y el sistema detecta tu presencia por geolocalización + sensor en la puerta.</li>
+            <li>Si es de noche y la casa estaba vacía, enciende solo las luces necesarias al <strong>30%</strong> para no deslumbrar.</li>
+            <li>Si hace calor y normalmente prefieres <strong>24 °C</strong> a esa hora, ajusta el aire acondicionado, pero evita las horas de tarifa pico eléctrica.</li>
+            <li>Si detecta que dejaste una ventana abierta con el aire funcionando, te avisa y propone cerrar persianas o apagar para evitar desperdicio.</li>
+            <li>Si dices <strong>"modo estudio"</strong>: baja el volumen, bloquea notificaciones de la TV, ajusta iluminación blanca y activa un temporizador de concentración.</li>
+            <li>Ante humo, fuga de gas o una puerta forzada: activa la alarma, sube luces al <strong>100%</strong>, envía notificación inmediata y ejecuta acciones automáticas según la gravedad.</li>
+        </ol>
+
+        <p>La diferencia es clara: no son "100 reglas" programadas manualmente, sino <strong>decisiones con contexto</strong> impulsadas por IA y datos en tiempo real.</p>
+
+        <!-- Sección 5: Beneficios -->
+        <h2>Beneficios principales</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">😌</div>
+                <h3>Comodidad</h3>
+                <p>Menos pasos, menos apps y más acciones automáticas realmente útiles.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💡</div>
+                <h3>Ahorro</h3>
+                <p>Optimización de energía basada en hábitos, ocupación y horarios tarifarios.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🔒</div>
+                <h3>Seguridad</h3>
+                <p>Alertas inteligentes con menos falsas alarmas y registro detallado de eventos.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">♿</div>
+                <h3>Inclusión</h3>
+                <p>Control por voz y rutinas accesibles para personas con movilidad reducida.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>Escalabilidad</h3>
+                <p>Empezar con pocos dispositivos y crecer sin cambiar de ecosistema.</p>
+            </div>
+        </div>
+
+        <!-- Sección 6: Riesgos -->
+        <h2>Riesgos y cómo se controlan</h2>
+
+        <p>Como todo sistema IoT, existen retos reales que deben gestionarse desde el diseño:</p>
+
+        <ul>
+            <li><strong>Privacidad:</strong> ofrecer modo de funcionamiento local, cifrado de extremo a extremo, permisos granulares y políticas claras de tratamiento de datos.</li>
+            <li><strong>Seguridad informática:</strong> autenticación fuerte (MFA), actualizaciones automáticas de firmware y segmentación de red para aislar los dispositivos IoT del resto de la red doméstica.</li>
+            <li><strong>Dependencia de internet:</strong> diseñar para que funciones críticas (cerraduras, alarmas, luces) sigan operando aunque se pierda la conexión a la nube.</li>
+            <li><strong>Compatibilidad:</strong> apostar por estándares abiertos y modernos como <strong>Matter</strong> y <strong>Thread</strong> para reducir ecosistemas cerrados y problemas entre marcas.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>Conclusión:</strong> El IoT de Automatización Tecnológica no es solo una casa con gadgets conectados. Es un ecosistema inteligente que aprende, se adapta y toma decisiones con contexto, combinando IoT, asistentes de voz e IA para ofrecer una experiencia realmente automatizada, segura y eficiente.</p>
+        </div>
+
+        <a href="index.html" class="back-btn">← Volver al Inicio</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-item">
+            <div class="footer-icon">📍</div>
+            <h3>Ubicación</h3>
+        </div>
+        <div class="footer-item">
+            <div class="footer-icon">📞</div>
+            <h3>57 300 000 0000</h3>
+        </div>
+        <div class="footer-item">
+            <div class="footer-icon">✉️</div>
+            <h3>asistencia@Blogi.co</h3>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Todos los Derechos Reservados.
+    </div>
+</footer>
+
+</body>
+</html>
